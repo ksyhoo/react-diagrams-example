@@ -1,11 +1,11 @@
 import * as React from "react"
-import { ActionModel } from "./ActionModel"
+import { QuestionModel } from "./QuestionModel"
 import { DiagramEngine, PortModelAlignment, PortWidget } from "@projectstorm/react-diagrams"
 import styled from "@emotion/styled"
 
-export interface ActionWidgetProps {
-  node: ActionModel
-  engine: DiagramEngine
+export interface QuestionWidgetProps {
+  node?: QuestionModel
+  engine?: DiagramEngine
   height?: number
   width?: number
   size?: number
@@ -23,16 +23,27 @@ namespace S {
       background: rgba(0, 0, 0, 1);
     }
   `
-  export const Action = styled.div`
-    background: #30c2a5;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  export const Question = styled.div<QuestionWidgetProps>`
+    width: 0;
+    height: 0;
+    border: ${props => props.size}px solid transparent;
+    border-bottom: ${props => props.size - props.size / 2.5}px solid #8870ab;
+    position: relative;
+    top: ${props => props.size}px;
+    &:after {
+      content: "";
+      position: absolute;
+      left: ${props => -Math.abs(props.size)}px;
+      top: ${props => props.size - props.size / 2.5}px;
+      width: 0;
+      height: 0;
+      border: ${props => props.size}px solid transparent;
+      border-top: ${props => props.size - props.size / 2.5}px solid #8870ab;
+    }
   `
   export const Label = styled.input`
     color: #ffffff;
-    background: #30c2a5;
+    background: #8870ab;
     border: none;
     outline: 1px dashed gray;
     text-align: center;
@@ -43,25 +54,18 @@ namespace S {
   `
 }
 
-export class ActionWidget extends React.Component<ActionWidgetProps> {
+export class QuestionWidget extends React.Component<QuestionWidgetProps> {
   handleLabelChange = () => {
     //TODO: label set logic
   }
   render() {
     return (
-      <S.Action
-        className={"action-node"}
-        style={{
-          position: "relative",
-          width: this.props.width,
-          height: this.props.height
-        }}
-      >
-        <S.Label onChange={this.handleLabelChange} />
+      <S.Question className={"question-node"} size={this.props.size}>
+        {/* <S.Label onChange={this.handleLabelChange} /> */}
         <PortWidget
           style={{
-            top: this.props.height / 2 - 8,
-            left: -8,
+            top: this.props.size / 2,
+            left: -this.props.size - 8,
             position: "absolute"
           }}
           port={this.props.node.getPort(PortModelAlignment.LEFT)}
@@ -71,7 +75,7 @@ export class ActionWidget extends React.Component<ActionWidgetProps> {
         </PortWidget>
         <PortWidget
           style={{
-            left: this.props.width / 2 - 8,
+            left: -8,
             top: -8,
             position: "absolute"
           }}
@@ -82,8 +86,8 @@ export class ActionWidget extends React.Component<ActionWidgetProps> {
         </PortWidget>
         <PortWidget
           style={{
-            left: this.props.width - 8,
-            top: this.props.height / 2 - 8,
+            left: this.props.size - 8,
+            top: this.props.size / 2,
             position: "absolute"
           }}
           port={this.props.node.getPort(PortModelAlignment.RIGHT)}
@@ -93,8 +97,8 @@ export class ActionWidget extends React.Component<ActionWidgetProps> {
         </PortWidget>
         <PortWidget
           style={{
-            left: this.props.width / 2 - 8,
-            top: this.props.height - 8,
+            left: -8,
+            top: this.props.size - 8,
             position: "absolute"
           }}
           port={this.props.node.getPort(PortModelAlignment.BOTTOM)}
@@ -102,7 +106,7 @@ export class ActionWidget extends React.Component<ActionWidgetProps> {
         >
           <S.Port />
         </PortWidget>
-      </S.Action>
+      </S.Question>
     )
   }
 }
