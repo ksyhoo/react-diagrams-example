@@ -1,12 +1,12 @@
 import * as React from "react"
 import { useStateValue } from "../store/context"
-import { TSCustomNodeModel } from "../custom-node-ts/TSCustomNodeModel"
-import { TSCustomNodeFactory } from "../custom-node-ts/TSCustomNodeFactory"
+import { ActionModel } from "./../nodes/action/ActionModel"
+import { ActionFactory } from "./../nodes/action/ActionFactory"
 const Tools = () => {
   const [state, dispatch] = useStateValue()
   const handleClick = () => {
-    state.engine.getNodeFactories().registerFactory(new TSCustomNodeFactory())
-    const node1 = new TSCustomNodeModel({ color: "rgb(192,255,0)" })
+    state.engine.getNodeFactories().registerFactory(new ActionFactory())
+    const node1 = new ActionModel()
     node1.setPosition(50, 50)
     state.model.addAll(node1)
     state.engine.setModel(state.model)
