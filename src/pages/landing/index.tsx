@@ -1,11 +1,7 @@
-import * as React from 'react'
+import * as React from "react"
 
 function landing() {
-    return (
-        <div>
-            
-        </div>
-    )
+  return <div></div>
 }
 
 export default landing

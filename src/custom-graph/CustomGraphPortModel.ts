@@ -1,15 +1,15 @@
-import { LinkModel, PortModel, DefaultLinkModel, PortModelAlignment } from '@projectstorm/react-diagrams';
+import { LinkModel, PortModel, DefaultLinkModel, PortModelAlignment } from "@projectstorm/react-diagrams";
 
 export class CustomGraphPortModel extends PortModel {
-	constructor(alignment: PortModelAlignment) {
-		super({
-			type: 'custom',
-			name: alignment,
-			alignment: alignment
-		});
-	}
+  constructor(alignment: PortModelAlignment) {
+    super({
+      type: "custom",
+      name: alignment,
+      alignment: alignment
+    });
+  }
 
-	createLinkModel(): LinkModel {
-		return new DefaultLinkModel();
-	}
+  createLinkModel(): LinkModel {
+    return new DefaultLinkModel();
+  }
 }
