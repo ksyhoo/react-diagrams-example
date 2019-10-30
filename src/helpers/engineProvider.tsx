@@ -11,6 +11,7 @@ import { ActionFactory } from "./../nodes/action/ActionFactory"
 import { ActionModel } from "./../nodes/action/ActionModel"
 import { QuestionModel } from "./../nodes/question/QuestionModel"
 import { QuestionFactory } from "./../nodes/question/QuestionFactory"
+import { ActionLinkFactory } from "./../nodes/action/ActionPortModel"
 
 export const EngineProvider = () => {
   const [state, dispatch] = useStateValue()
@@ -19,6 +20,7 @@ export const EngineProvider = () => {
 
   engine.getNodeFactories().registerFactory(new ActionFactory())
   engine.getNodeFactories().registerFactory(new QuestionFactory())
+  engine.getLinkFactories().registerFactory(new ActionLinkFactory())
 
   const node4 = new ActionModel()
   node4.setPosition(250, 108)
