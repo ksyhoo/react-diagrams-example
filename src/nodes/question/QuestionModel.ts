@@ -1,5 +1,5 @@
 import { NodeModel, NodeModelGenerics, PortModelAlignment } from "@projectstorm/react-diagrams";
-import { ActionPortModel } from "./QuestionPortModel";
+import { QuestionPortModel } from "./QuestionPortModel";
 
 export interface QuestionModel {
   PORT: QuestionModel;
@@ -11,9 +11,9 @@ export class QuestionModel extends NodeModel<NodeModelGenerics & QuestionModel> 
     super({
       type: "question"
     });
-    this.addPort(new ActionPortModel(PortModelAlignment.LEFT));
-    this.addPort(new ActionPortModel(PortModelAlignment.TOP));
-    this.addPort(new ActionPortModel(PortModelAlignment.RIGHT));
-    this.addPort(new ActionPortModel(PortModelAlignment.BOTTOM));
+    this.addPort(new QuestionPortModel(PortModelAlignment.LEFT));
+    this.addPort(new QuestionPortModel(PortModelAlignment.TOP));
+    this.addPort(new QuestionPortModel(PortModelAlignment.RIGHT));
+    this.addPort(new QuestionPortModel(PortModelAlignment.BOTTOM));
   }
 }
