@@ -31,6 +31,7 @@ namespace S {
     position: relative;
     top: ${props => props.size}px;
     &:after {
+      z-index: -1;
       content: "";
       position: absolute;
       left: ${props => -Math.abs(props.size)}px;
@@ -98,7 +99,7 @@ export class QuestionWidget extends React.Component<QuestionWidgetProps> {
         <PortWidget
           style={{
             left: -8,
-            top: this.props.size - 8,
+            top: this.props.size + 8,
             position: "absolute"
           }}
           port={this.props.node.getPort(PortModelAlignment.BOTTOM)}
